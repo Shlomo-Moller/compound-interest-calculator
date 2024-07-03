@@ -1,6 +1,6 @@
 {
   "name": "compound-interest-calculator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Calculates the total investment and profit for each year of a compound interest period based on number of years, monthly deposit, and percentage return.",
   "main": "index.ts",
   "dependencies": {
