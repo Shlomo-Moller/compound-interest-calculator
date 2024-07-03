@@ -30,4 +30,4 @@ When running without specifying parameters' values:
 npm run calc
 ```
 
-those values get their defaults from [defaults.ts](src\utils\defaults.ts)
+those values get their defaults from [defaults.ts](src/utils/defaults.ts)
