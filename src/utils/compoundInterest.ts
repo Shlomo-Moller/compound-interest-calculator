@@ -80,12 +80,14 @@ const printCompoundInterest = (
   const translatedData = Array.from(dataMap.entries()).map(
     ([, value], index) => ({
       Year: index,
-      "Invested in Total": roundAlignFormat(value.totalDeposit),
+      Invested: roundAlignFormat(value.totalDeposit),
       Have: roundAlignFormat(value.totalMoney),
       Profit: roundAlignFormat(value.totalProfit),
       "Monthly profit": roundAlignFormat(value.monthlyProfit),
     })
   );
+
+  translatedData.shift();
 
   const firstYearInfo = dataMap.get(1);
 
@@ -111,6 +113,12 @@ const printCompoundInterest = (
   } else {
     console.log("Monthly Deposit:", firstYearInfo.totalDeposit / 12);
   }
+
+  console.log(
+    `All table values are cumulative -
+    - ‘Invested’/‘Have’/‘Profit’ in total. Not per year/row.
+    - ‘Monthly profit’ is calculated by dividing the total profit accumulated up to the specified year by the number of months from the start until that year.`
+  );
 
   console.table(translatedData);
 };
