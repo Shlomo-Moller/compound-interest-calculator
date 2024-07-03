@@ -1,7 +1,12 @@
+import { DepositFrequency } from "./enums";
+
 const DEFAULTS = {
   yearsCount: 40,
-  monthlyDeposit: 1000,
   annualReturnPercentage: 8,
+  deposit: {
+    amount: 1000,
+    frequency: DepositFrequency.Monthly,
+  },
 };
 
 export { DEFAULTS };

@@ -1,18 +1,31 @@
-import { DEFAULTS } from "./defaults";
 import { getNewDataMap, getRequiredPaddingLength } from "./dataMap";
 import { addAnnualReturn, padRight } from "./functions";
 import { roundFormat } from "./currencyFormat";
+import { DepositFrequency } from "./enums";
 
 const getCompoundInterest = (
-  yearsCount = DEFAULTS.yearsCount,
-  monthlyDeposit = DEFAULTS.monthlyDeposit,
-  annualReturnPercentage = DEFAULTS.annualReturnPercentage
+  yearsCount: number,
+  annualReturnPercentage: number,
+  depositAmount: number,
+  depositRate: DepositFrequency
 ) => {
+  let yearIndex = 1;
+
+  const oneTimeDeposit = () => depositRate === DepositFrequency.OneTime;
+  const monthlyDeposit = () => depositRate === DepositFrequency.Monthly;
+  const firstYear = () => yearIndex === 1;
+
   const map = getNewDataMap();
 
-  for (let yearIndex = 1; yearIndex <= yearsCount; ++yearIndex) {
+  for (; yearIndex <= yearsCount; ++yearIndex) {
     const lastYearIndex = yearIndex - 1;
-    const currentYearDeposit = 12 * monthlyDeposit;
+    const currentYearDeposit = oneTimeDeposit()
+      ? firstYear()
+        ? depositAmount
+        : 0
+      : monthlyDeposit()
+      ? depositAmount * 12
+      : depositAmount;
     const lastYearInfo = map.get(lastYearIndex);
 
     if (lastYearInfo === undefined) {
@@ -21,7 +34,13 @@ const getCompoundInterest = (
     }
 
     const lastYearDeposit = lastYearInfo.totalDeposit;
-    const totalDeposit = lastYearDeposit + currentYearDeposit;
+    const totalDeposit =
+      lastYearDeposit +
+      (oneTimeDeposit()
+        ? firstYear()
+          ? depositAmount
+          : 0
+        : currentYearDeposit);
     const totalMoney = addAnnualReturn(
       lastYearInfo.totalMoney + currentYearDeposit,
       annualReturnPercentage
@@ -49,7 +68,8 @@ const printCompoundInterest = (
       totalProfit: number;
       monthlyProfit: number;
     }
-  >
+  >,
+  depositRate: DepositFrequency
 ) => {
   const alignWithSpaces = (str: string): string =>
     padRight(str, getRequiredPaddingLength(dataMap));
@@ -60,7 +80,7 @@ const printCompoundInterest = (
   const translatedData = Array.from(dataMap.entries()).map(
     ([, value], index) => ({
       Year: index,
-      Invested: roundAlignFormat(value.totalDeposit),
+      "Invested in Total": roundAlignFormat(value.totalDeposit),
       Have: roundAlignFormat(value.totalMoney),
       Profit: roundAlignFormat(value.totalProfit),
       "Monthly profit": roundAlignFormat(value.monthlyProfit),
@@ -78,9 +98,19 @@ const printCompoundInterest = (
     (100 * firstYearInfo.totalProfit) / firstYearInfo.totalDeposit
   );
 
+  const oneTimeDeposit = () => depositRate === DepositFrequency.OneTime;
+  const yearlyDeposit = () => depositRate === DepositFrequency.Yearly;
+
   console.log("Total Years of Investment:", dataMap.size - 1);
-  console.log("Monthly Deposit:", firstYearInfo.totalDeposit / 12);
-  console.log("Annual Return Percentage", annualReturnPercentage);
+  console.log("Annual Return Percentage:", annualReturnPercentage);
+
+  if (oneTimeDeposit()) {
+    console.log("One Time Deposit:", firstYearInfo.totalDeposit);
+  } else if (yearlyDeposit()) {
+    console.log("Yearly Deposit:", firstYearInfo.totalDeposit);
+  } else {
+    console.log("Monthly Deposit:", firstYearInfo.totalDeposit / 12);
+  }
 
   console.table(translatedData);
 };

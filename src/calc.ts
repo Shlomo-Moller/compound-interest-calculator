@@ -6,13 +6,15 @@ import { DEFAULTS } from "./utils/defaults";
 
 const compoundInterest = (
   yearsCount = DEFAULTS.yearsCount,
-  monthlyDeposit = DEFAULTS.monthlyDeposit,
-  annualReturnPercentage = DEFAULTS.annualReturnPercentage
+  annualReturnPercentage = DEFAULTS.annualReturnPercentage,
+  depositAmount = DEFAULTS.deposit.amount,
+  depositRate = DEFAULTS.deposit.frequency
 ) => {
   const map = getCompoundInterest(
     yearsCount,
-    monthlyDeposit,
-    annualReturnPercentage
+    annualReturnPercentage,
+    depositAmount,
+    depositRate
   );
 
   if (map === undefined) {
@@ -20,7 +22,7 @@ const compoundInterest = (
     return;
   }
 
-  printCompoundInterest(map);
+  printCompoundInterest(map, depositRate);
 };
 
 export { compoundInterest };

@@ -7,13 +7,15 @@ if (require.main === module) {
     ,
     ,
     yearsCount = DEFAULTS.yearsCount,
-    monthlyDeposit = DEFAULTS.monthlyDeposit,
     annualReturnPercentage = DEFAULTS.annualReturnPercentage,
+    depositAmount = DEFAULTS.deposit.amount,
+    depositRate = DEFAULTS.deposit.frequency,
   ] = process.argv;
   compoundInterest(
     Number(yearsCount),
-    Number(monthlyDeposit),
-    Number(annualReturnPercentage)
+    Number(annualReturnPercentage),
+    Number(depositAmount),
+    Number(depositRate)
   );
 }
 
