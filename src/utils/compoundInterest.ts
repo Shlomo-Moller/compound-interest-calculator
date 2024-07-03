@@ -74,8 +74,9 @@ const printCompoundInterest = (
     return;
   }
 
-  const annualReturnPercentage =
-    (100 * firstYearInfo.totalProfit) / firstYearInfo.totalDeposit;
+  const annualReturnPercentage = Math.round(
+    (100 * firstYearInfo.totalProfit) / firstYearInfo.totalDeposit
+  );
 
   console.log("Total Years of Investment:", dataMap.size - 1);
   console.log("Monthly Deposit:", firstYearInfo.totalDeposit / 12);
