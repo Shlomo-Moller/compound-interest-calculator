@@ -79,7 +79,7 @@ const printCompoundInterest = (
 
   console.log("Total Years of Investment:", dataMap.size - 1);
   console.log("Monthly Deposit:", firstYearInfo.totalDeposit / 12);
-  console.log("Annual Return Percentage", annualReturnPercentage + "%");
+  console.log("Annual Return Percentage", annualReturnPercentage);
 
   console.table(translatedData);
 };
