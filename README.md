@@ -1,6 +1,8 @@
 # compound-interest-calculator
 
-Calculates the total investment and profit for each year of a compound interest period based on number of investment years, annual percentage return, and deposit amount (fixed) and frequency.
+Calculates the total investment and profit for each year of a
+[compound interest](https://en.wikipedia.org/wiki/Compound_interest)
+period based on number of investment years, annual percentage return, and deposit amount (fixed) and frequency.
 
 ## Usage
 
@@ -36,4 +38,4 @@ those values get their defaults from [`src/utils/defaults.ts`](src/utils/default
 
 ## To improve
 
-Should improve the logic of the functions at [`src\utils\compoundInterest.ts`](src\utils\compoundInterest.ts).
+Should improve the logic of the functions at [`src/utils/compoundInterest.ts`](src/utils/compoundInterest.ts).
