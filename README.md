@@ -20,6 +20,8 @@ where the... :
 - `<deposit-amount>` is to be replaced with the amount of money being invested (default is `1000` as of today), and
 - `<deposit-frequency>` is to be replaced with frequency in which `<deposit-amount>` is being invested (Options are `0`=`OneTime`, `1`=`Yearly`, and `2`=`Monthly`, and default is `Monthly` as of today).
 
+### Example
+
 For example, say we invest 1,000 NIS each month, for 40 years, and that the annual return percentage is 7%. Then:
 
 ```
