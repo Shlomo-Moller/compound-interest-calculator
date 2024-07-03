@@ -1,6 +1,6 @@
 # compound-interest-calculator
 
-Calculates the total investment and profit for each year of a
+Code to run via CLI. Calculates the total investment and profit for each year of a
 [compound interest](https://en.wikipedia.org/wiki/Compound_interest)
 period based on number of investment years, annual percentage return, and deposit amount (fixed) and frequency.
 
